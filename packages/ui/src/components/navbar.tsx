@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Phone } from "lucide-react";
+import { CallStatusDropdown } from "@workspace/ui/components/call-status-dropdown";
 
 export default function Navbar() {
   const [isOnCall, setIsOnCall] = useState(false);
@@ -99,43 +99,22 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center">
-            <button
-              onClick={handlePhoneClick}
-              className="relative p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
-              aria-label={isOnCall ? "End call" : "Start call"}
-            >
-              <CallIndicator
+            <div className="mr-4">
+              <CallStatusDropdown
                 isOnCall={isOnCall}
                 isStatusLoaded={isStatusLoaded}
               />
+            </div>
+            <button
+              onClick={handlePhoneClick}
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors duration-200 flex items-center gap-2"
+              aria-label={isOnCall ? "End call" : "Start call"}
+            >
+              {isOnCall ? "End Call" : "Start Call"}
             </button>
           </div>
         </div>
       </div>
     </nav>
-  );
-}
-
-interface CallIndicatorProps {
-  isOnCall: boolean;
-  isStatusLoaded: boolean;
-}
-
-function CallIndicator({ isOnCall, isStatusLoaded }: CallIndicatorProps) {
-  return (
-    <div className="relative">
-      <div className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center">
-        <Phone className="h-5 w-5 text-gray-700" />
-      </div>
-      <div
-        className={`absolute -top-1 -right-1 w-4 h-4 rounded-full ${
-          !isStatusLoaded
-            ? "bg-gray-400" // Grey by default until status is loaded
-            : isOnCall
-              ? "bg-green-500" // Green when on call
-              : "bg-red-500" // Red when not on call
-        }`}
-      />
-    </div>
   );
 }
