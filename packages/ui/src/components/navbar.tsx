@@ -5,7 +5,7 @@ import { Phone } from "lucide-react";
 
 export default function Navbar() {
   const [isOnCall, setIsOnCall] = useState(false);
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [isStatusLoaded, setIsStatusLoaded] = useState(false);
 
   // Initialize state from localStorage on component mount
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Navbar() {
       };
 
       window.addEventListener("storage", handleStorageChange);
-      setIsPageLoaded(true);
+      setIsStatusLoaded(true);
 
       // Clean up event listener
       return () => {
@@ -104,7 +104,10 @@ export default function Navbar() {
               className="relative p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
               aria-label={isOnCall ? "End call" : "Start call"}
             >
-              <CallIndicator isOnCall={isOnCall} />
+              <CallIndicator
+                isOnCall={isOnCall}
+                isStatusLoaded={isStatusLoaded}
+              />
             </button>
           </div>
         </div>
@@ -115,16 +118,23 @@ export default function Navbar() {
 
 interface CallIndicatorProps {
   isOnCall: boolean;
+  isStatusLoaded: boolean;
 }
 
-function CallIndicator({ isOnCall }: CallIndicatorProps) {
+function CallIndicator({ isOnCall, isStatusLoaded }: CallIndicatorProps) {
   return (
     <div className="relative">
       <div className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center">
         <Phone className="h-5 w-5 text-gray-700" />
       </div>
       <div
-        className={`absolute -top-1 -right-1 w-4 h-4 rounded-full ${isOnCall ? "bg-green-500" : "bg-red-500"}`}
+        className={`absolute -top-1 -right-1 w-4 h-4 rounded-full ${
+          !isStatusLoaded
+            ? "bg-gray-400" // Grey by default until status is loaded
+            : isOnCall
+              ? "bg-green-500" // Green when on call
+              : "bg-red-500" // Red when not on call
+        }`}
       />
     </div>
   );
