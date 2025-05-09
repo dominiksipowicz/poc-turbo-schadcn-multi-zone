@@ -75,7 +75,7 @@ export function CallStatusDropdown({
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute right-0 mt-2 min-w-[150px] w-full sm:w-auto bg-white rounded-md shadow-lg border border-gray-200 z-50">
+        <div className="absolute right-0 mt-2 min-w-[200px] w-full sm:w-[250px] md:w-[300px] bg-white rounded-md shadow-lg border border-gray-200 z-50">
           <div className="p-4 border-b border-gray-100">
             <div className="font-medium text-gray-800">Call Status</div>
             <div
@@ -95,7 +95,7 @@ export function CallStatusDropdown({
             >
               <Pin
                 className={cn(
-                  "h-4 w-4",
+                  "h-5 w-5",
                   isPinned ? "text-blue-500" : "text-gray-500",
                 )}
               />

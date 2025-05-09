@@ -71,7 +71,7 @@ export function PinnedCallStatus() {
   }
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md z-50 animate-in slide-in-from-bottom duration-300">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md z-50 animate-in slide-in-from-bottom duration-300">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 py-3">
           <div className="flex items-center gap-4">
@@ -103,7 +103,7 @@ export function PinnedCallStatus() {
             className="p-2 rounded-full hover:bg-gray-100 transition-colors"
             aria-label="Unpin call status"
           >
-            <X className="h-4 w-4 text-gray-500" />
+            <X className="h-5 w-5 text-gray-500" />
           </button>
         </div>
       </div>
