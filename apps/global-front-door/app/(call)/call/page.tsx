@@ -109,42 +109,42 @@ export default function CallPage() {
 
         <div className="grid grid-cols-3 gap-8 max-w-md w-full">
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
+            <button className="w-14 h-14 aspect-square rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <UserPlus className="h-6 w-6" />
             </button>
             <span className="mt-2 text-sm text-gray-700">Add</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
+            <button className="w-14 h-14 aspect-square rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <ArrowRight className="h-6 w-6" />
             </button>
             <span className="mt-2 text-sm text-gray-700">Transfer</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
+            <button className="w-14 h-14 aspect-square rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <Phone className="h-6 w-6" />
             </button>
             <span className="mt-2 text-sm text-gray-700">Consult</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
+            <button className="w-14 h-14 aspect-square rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <Mic className="h-6 w-6" />
             </button>
             <span className="mt-2 text-sm text-gray-700">Mute</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
+            <button className="w-14 h-14 aspect-square rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <Pause className="h-6 w-6" />
             </button>
             <span className="mt-2 text-sm text-gray-700">Hold</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
+            <button className="w-14 h-14 aspect-square rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <div className="grid grid-cols-3 gap-0.5">
                 <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
                 <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
@@ -164,7 +164,7 @@ export default function CallPage() {
         <div className="mt-8">
           <button
             onClick={handleEndCall}
-            className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition-colors"
+            className="w-16 h-16 aspect-square rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition-colors"
           >
             <Phone className="h-8 w-8 transform rotate-135" />
           </button>

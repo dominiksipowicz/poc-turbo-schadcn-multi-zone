@@ -52,17 +52,17 @@ export function CallStatusDropdown({
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 transition-colors"
+        className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100 transition-colors"
         aria-expanded={isDropdownOpen}
         aria-haspopup="true"
       >
         <div className="relative flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center">
+          <div className="w-8 h-8 aspect-square rounded-full border-2 border-gray-300 flex items-center justify-center">
             <Phone className="h-4 w-4 text-gray-700" />
           </div>
           <div
             className={cn(
-              "absolute -top-1 -right-1 w-3 h-3 rounded-full",
+              "absolute -top-1 -right-1 w-3 h-3 aspect-square rounded-full",
               !isStatusLoaded
                 ? "bg-gray-400"
                 : isOnCall
@@ -75,12 +75,12 @@ export function CallStatusDropdown({
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute right-0 mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 z-50">
-          <div className="p-3 border-b border-gray-100">
+        <div className="absolute right-0 mt-2 min-w-[150px] w-full sm:w-auto bg-white rounded-md shadow-lg border border-gray-200 z-50">
+          <div className="p-4 border-b border-gray-100">
             <div className="font-medium text-gray-800">Call Status</div>
             <div
               className={cn(
-                "text-sm mt-1",
+                "text-sm mt-2",
                 isOnCall ? "text-green-600" : "text-red-600",
               )}
             >
@@ -88,10 +88,10 @@ export function CallStatusDropdown({
             </div>
           </div>
 
-          <div className="p-2">
+          <div className="p-3">
             <button
               onClick={togglePin}
-              className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+              className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
             >
               <Pin
                 className={cn(

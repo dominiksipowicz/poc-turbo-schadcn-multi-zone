@@ -71,17 +71,17 @@ export function PinnedCallStatus() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md z-50 animate-in slide-in-from-bottom duration-300">
+    <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md z-50 animate-in slide-in-from-bottom duration-300">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 py-3">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <div className="relative flex items-center justify-center">
-              <div className="w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center">
+              <div className="w-8 h-8 aspect-square rounded-full border-2 border-gray-300 flex items-center justify-center">
                 <Phone className="h-4 w-4 text-gray-700" />
               </div>
               <div
                 className={cn(
-                  "absolute -top-1 -right-1 w-3 h-3 rounded-full",
+                  "absolute -top-1 -right-1 w-3 h-3 aspect-square rounded-full",
                   isOnCall ? "bg-green-500" : "bg-red-500",
                 )}
               />
@@ -93,7 +93,7 @@ export function PinnedCallStatus() {
                 {isOnCall ? "Active Call" : "No Active Call"}
               </span>
               {isOnCall && (
-                <span className="text-gray-500 ml-2">01191-(888) 292-2226</span>
+                <span className="text-gray-500 ml-3">01191-(888) 292-2226</span>
               )}
             </div>
           </div>
