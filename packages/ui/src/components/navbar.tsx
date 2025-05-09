@@ -36,7 +36,9 @@ export default function Navbar() {
   const handlePhoneClick = () => {
     if (!isOnCall) {
       // Start a call
+      const now = Date.now();
       localStorage.setItem("callStatus", "active");
+      localStorage.setItem("callStartTime", now.toString());
       setIsOnCall(true);
 
       // Open a new tab without switching focus to it
@@ -64,6 +66,7 @@ export default function Navbar() {
     } else {
       // End the call
       localStorage.setItem("callStatus", "inactive");
+      localStorage.removeItem("callStartTime");
       setIsOnCall(false);
     }
   };

@@ -23,6 +23,20 @@ export function CallStatusDropdown({
       if (storedPinStatus) {
         setIsPinned(storedPinStatus === "true");
       }
+
+      // Add event listener for storage changes (for cross-tab synchronization)
+      const handleStorageChange = (e: StorageEvent) => {
+        if (e.key === "callStatusPinned") {
+          setIsPinned(e.newValue === "true");
+        }
+      };
+
+      window.addEventListener("storage", handleStorageChange);
+
+      // Clean up event listener
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
     }
   }, []);
 

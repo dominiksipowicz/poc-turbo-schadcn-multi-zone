@@ -8,6 +8,8 @@ export function PinnedCallStatus() {
   const [isOnCall, setIsOnCall] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
   const [isStatusLoaded, setIsStatusLoaded] = useState(false);
+  const [callDuration, setCallDuration] = useState(0);
+  const [callStartTime, setCallStartTime] = useState<number | null>(null);
 
   // Initialize state from localStorage
   useEffect(() => {
@@ -24,14 +26,52 @@ export function PinnedCallStatus() {
         setIsPinned(storedPinStatus === "true");
       }
 
+      // Check call start time
+      const storedCallStartTime = localStorage.getItem("callStartTime");
+      if (storedCallStartTime) {
+        setCallStartTime(parseInt(storedCallStartTime, 10));
+      }
+
       setIsStatusLoaded(true);
 
       // Add event listeners for changes
       const handleStorageChange = (e: StorageEvent) => {
         if (e.key === "callStatus") {
-          setIsOnCall(e.newValue === "active");
+          const newCallStatus = e.newValue === "active";
+          setIsOnCall(newCallStatus);
+
+          // If call is starting, set the start time
+          if (newCallStatus && e.oldValue !== "active") {
+            const now = Date.now();
+            setCallStartTime(now);
+            localStorage.setItem("callStartTime", now.toString());
+          }
+
+          // If call is ending, reset the start time and automatically unpin the call bar
+          if (!newCallStatus && e.oldValue === "active") {
+            setCallStartTime(null);
+            localStorage.removeItem("callStartTime");
+            setCallDuration(0);
+
+            // Automatically unpin the call bar when call ends
+            localStorage.setItem("callStatusPinned", "false");
+            setIsPinned(false);
+
+            // Dispatch event to notify other components
+            const unpinEvent = new CustomEvent("callStatusPinChanged", {
+              detail: { isPinned: false },
+            });
+            window.dispatchEvent(unpinEvent);
+          }
         } else if (e.key === "callStatusPinned") {
           setIsPinned(e.newValue === "true");
+        } else if (e.key === "callStartTime") {
+          if (e.newValue) {
+            setCallStartTime(parseInt(e.newValue, 10));
+          } else {
+            setCallStartTime(null);
+            setCallDuration(0);
+          }
         }
       };
 
@@ -55,6 +95,29 @@ export function PinnedCallStatus() {
     }
   }, []);
 
+  // Update call duration
+  useEffect(() => {
+    if (!isOnCall || callStartTime === null) {
+      setCallDuration(0);
+      return;
+    }
+
+    const calculateDuration = () => {
+      if (callStartTime) {
+        const elapsed = Math.floor((Date.now() - callStartTime) / 1000);
+        setCallDuration(elapsed);
+      }
+    };
+
+    // Calculate initial duration
+    calculateDuration();
+
+    // Set up interval to update duration
+    const interval = setInterval(calculateDuration, 1000);
+
+    return () => clearInterval(interval);
+  }, [isOnCall, callStartTime]);
+
   const unpinCallStatus = () => {
     localStorage.setItem("callStatusPinned", "false");
     setIsPinned(false);
@@ -64,6 +127,20 @@ export function PinnedCallStatus() {
       detail: { isPinned: false },
     });
     window.dispatchEvent(event);
+  };
+
+  const formatTime = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+
+    return [
+      hours > 0 ? hours.toString().padStart(2, "0") : "",
+      minutes.toString().padStart(2, "0"),
+      secs.toString().padStart(2, "0"),
+    ]
+      .filter(Boolean)
+      .join(":");
   };
 
   if (!isPinned || !isStatusLoaded) {
@@ -93,7 +170,14 @@ export function PinnedCallStatus() {
                 {isOnCall ? "Active Call" : "No Active Call"}
               </span>
               {isOnCall && (
-                <span className="text-gray-500 ml-3">01191-(888) 292-2226</span>
+                <>
+                  <span className="text-gray-500 ml-3">
+                    01191-(888) 292-2226
+                  </span>
+                  <span className="text-gray-500 ml-3">
+                    {formatTime(callDuration)}
+                  </span>
+                </>
               )}
             </div>
           </div>

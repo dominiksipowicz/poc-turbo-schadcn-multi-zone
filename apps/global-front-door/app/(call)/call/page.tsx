@@ -7,6 +7,7 @@ export default function CallPage() {
   const [callDuration, setCallDuration] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
   const [hasMicAccess, setHasMicAccess] = useState(false);
+  const [callStartTime, setCallStartTime] = useState<number | null>(null);
 
   useEffect(() => {
     // Check if we're in a browser environment
@@ -17,6 +18,17 @@ export default function CallPage() {
         // If call is not active, redirect to home
         window.location.href = "/";
         return;
+      }
+
+      // Get call start time
+      const storedCallStartTime = localStorage.getItem("callStartTime");
+      if (storedCallStartTime) {
+        setCallStartTime(parseInt(storedCallStartTime, 10));
+      } else {
+        // If no start time is stored, set it now
+        const now = Date.now();
+        localStorage.setItem("callStartTime", now.toString());
+        setCallStartTime(now);
       }
 
       // Set connected status
@@ -34,16 +46,13 @@ export default function CallPage() {
           console.error("Error accessing microphone:", err);
         });
 
-      // Start timer
-      const timer = setInterval(() => {
-        setCallDuration((prev) => prev + 1);
-      }, 1000);
-
       // Set up storage event listener for cross-tab communication
       const handleStorageChange = (e: StorageEvent) => {
         if (e.key === "callStatus" && e.newValue !== "active") {
           // Call ended from another tab
           window.close();
+        } else if (e.key === "callStartTime" && e.newValue) {
+          setCallStartTime(parseInt(e.newValue, 10));
         }
       };
 
@@ -54,11 +63,31 @@ export default function CallPage() {
 
       // Clean up
       return () => {
-        clearInterval(timer);
         window.removeEventListener("storage", handleStorageChange);
       };
     }
   }, []);
+
+  // Update call duration based on start time
+  useEffect(() => {
+    if (!callStartTime) return;
+
+    const updateDuration = () => {
+      const elapsed = Math.floor((Date.now() - callStartTime) / 1000);
+      setCallDuration(elapsed);
+    };
+
+    // Initial update
+    updateDuration();
+
+    // Set up timer
+    const timer = setInterval(updateDuration, 1000);
+
+    // Clean up
+    return () => {
+      clearInterval(timer);
+    };
+  }, [callStartTime]);
 
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
@@ -74,6 +103,7 @@ export default function CallPage() {
 
   const handleEndCall = () => {
     localStorage.setItem("callStatus", "inactive");
+    localStorage.removeItem("callStartTime");
     window.close();
   };
 
