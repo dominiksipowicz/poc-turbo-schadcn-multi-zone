@@ -78,84 +78,86 @@ export default function CallPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
+    <div className="min-h-screen bg-white flex flex-col">
+      <header className="bg-gray-100 text-gray-800 p-4 flex justify-between items-center border-b border-gray-200">
         <button className="p-2">
           <span className="sr-only">Menu</span>
           <div className="space-y-1">
-            <div className="w-5 h-0.5 bg-white"></div>
-            <div className="w-5 h-0.5 bg-white"></div>
-            <div className="w-5 h-0.5 bg-white"></div>
+            <div className="w-5 h-0.5 bg-gray-800"></div>
+            <div className="w-5 h-0.5 bg-gray-800"></div>
+            <div className="w-5 h-0.5 bg-gray-800"></div>
           </div>
         </button>
-        <h1 className="text-xl font-semibold">Voice Call</h1>
+        <h1 className="text-xl font-semibold text-gray-800">Voice Call</h1>
         <button className="p-2">
           <span className="sr-only">Expand</span>
-          <ArrowRight className="h-5 w-5 transform rotate-45" />
+          <ArrowRight className="h-5 w-5 transform rotate-45 text-gray-800" />
         </button>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center p-6 space-y-8">
+      <main className="flex-1 flex flex-col items-center justify-center p-6 space-y-8 bg-white">
         <div className="text-center">
-          <p className="text-2xl mb-4">01191-(888) 292-2226</p>
+          <p className="text-2xl mb-4 text-gray-800">01191-(888) 292-2226</p>
           <div className="inline-block px-6 py-2 rounded-full bg-green-100 text-green-800 font-medium">
             Connected
           </div>
         </div>
 
-        <div className="text-4xl font-mono">{formatTime(callDuration)}</div>
+        <div className="text-4xl font-mono text-gray-800">
+          {formatTime(callDuration)}
+        </div>
 
         <div className="grid grid-cols-3 gap-8 max-w-md w-full">
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-blue-900 flex items-center justify-center text-blue-900">
+            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <UserPlus className="h-6 w-6" />
             </button>
-            <span className="mt-2 text-sm">Add</span>
+            <span className="mt-2 text-sm text-gray-700">Add</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-blue-900 flex items-center justify-center text-blue-900">
+            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <ArrowRight className="h-6 w-6" />
             </button>
-            <span className="mt-2 text-sm">Transfer</span>
+            <span className="mt-2 text-sm text-gray-700">Transfer</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-blue-900 flex items-center justify-center text-blue-900">
+            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <Phone className="h-6 w-6" />
             </button>
-            <span className="mt-2 text-sm">Consult</span>
+            <span className="mt-2 text-sm text-gray-700">Consult</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-blue-900 flex items-center justify-center text-blue-900">
+            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <Mic className="h-6 w-6" />
             </button>
-            <span className="mt-2 text-sm">Mute</span>
+            <span className="mt-2 text-sm text-gray-700">Mute</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-blue-900 flex items-center justify-center text-blue-900">
+            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <Pause className="h-6 w-6" />
             </button>
-            <span className="mt-2 text-sm">Hold</span>
+            <span className="mt-2 text-sm text-gray-700">Hold</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <button className="w-14 h-14 rounded-full border-2 border-blue-900 flex items-center justify-center text-blue-900">
+            <button className="w-14 h-14 rounded-full border-2 border-gray-400 flex items-center justify-center text-gray-700 hover:bg-gray-50">
               <div className="grid grid-cols-3 gap-0.5">
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
               </div>
             </button>
-            <span className="mt-2 text-sm">Keypad</span>
+            <span className="mt-2 text-sm text-gray-700">Keypad</span>
           </div>
         </div>
 

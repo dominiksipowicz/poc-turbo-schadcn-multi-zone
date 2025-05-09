@@ -1,5 +1,4 @@
 import type React from "react";
-import { Inter } from "next/font/google";
 import Navbar from "@workspace/ui/components/navbar";
 
 export default function MainLayout({
