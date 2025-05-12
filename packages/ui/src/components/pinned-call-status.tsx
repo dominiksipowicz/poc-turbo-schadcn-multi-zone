@@ -82,14 +82,14 @@ export function PinnedCallStatus() {
       window.addEventListener("storage", handleStorageChange);
       window.addEventListener(
         "callStatusPinChanged",
-        handlePinChange as EventListener,
+        handlePinChange as EventListener
       );
 
       return () => {
         window.removeEventListener("storage", handleStorageChange);
         window.removeEventListener(
           "callStatusPinChanged",
-          handlePinChange as EventListener,
+          handlePinChange as EventListener
         );
       };
     }
@@ -117,6 +117,26 @@ export function PinnedCallStatus() {
 
     return () => clearInterval(interval);
   }, [isOnCall, callStartTime]);
+
+  // Refresh call status every 1 second
+  useEffect(() => {
+    const refreshCallStatus = () => {
+      if (typeof window !== "undefined") {
+        const storedCallStatus = localStorage.getItem("callStatus");
+        if (storedCallStatus) {
+          setIsOnCall(storedCallStatus === "active");
+        }
+      }
+    };
+
+    // Initial refresh
+    refreshCallStatus();
+
+    // Set up interval for periodic refresh
+    const interval = setInterval(refreshCallStatus, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const unpinCallStatus = () => {
     localStorage.setItem("callStatusPinned", "false");
@@ -159,7 +179,7 @@ export function PinnedCallStatus() {
               <div
                 className={cn(
                   "absolute -top-1 -right-1 w-3 h-3 aspect-square rounded-full",
-                  isOnCall ? "bg-green-500" : "bg-red-500",
+                  isOnCall ? "bg-green-500" : "bg-red-500"
                 )}
               />
             </div>

@@ -110,7 +110,7 @@ export default function Navbar() {
             </div>
             <button
               onClick={handlePhoneClick}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors duration-200 flex items-center gap-2"
+              className="w-[100px] px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors duration-200 flex items-center gap-2"
               aria-label={isOnCall ? "End call" : "Start call"}
             >
               {isOnCall ? "End Call" : "Start Call"}
